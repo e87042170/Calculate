@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>算數</title>
+    <style>
+        body{
+            max-width: 750px;
+            margin: auto;
+        }
+        ul li {
+            padding: 10px 5px;
+        }
+        #questions{
+            padding: 0px 15px;
+            font-size: large;
+        }
+        #questions P input{
+            width: 4em;
+        }
+        button{
+            margin: 0px 15px;
+        }
+    </style>
+</head>
+<body>  
+    <h2 style="text-align: center;">1 ~ 10 的乘法</h2>    
+    <button id="refresh">出 題</button><button id="score">評 分</button>
+    <div id="questions"></div>
+<script>
+    let multiplicand = [];
+    let multiplier = [];
+    let min;
+    let max;
+    let qs = document.getElementById("questions");
+    let re = document.getElementById("refresh");
+    let sc = document.getElementById("score");
+    re.addEventListener('click',function(){refreshQuestion()});
+    sc.addEventListener('click',function(){score()});
+    refreshQuestion();
+    function refreshQuestion(){
+        multiplicand = [];
+        multiplier = [];
+        min = Math.ceil(1);
+        max = Math.floor(10);
+        qs.innerHTML = "";
+        for(let i = 0; i < 10; i++){
+            multiplicand.push(Math.floor(Math.random()*(max - min + 1) + min));
+        }
+        for(let i = 0; i < 10; i++){
+            multiplier.push(Math.floor(Math.random()*(max - min + 1) + min));
+        }
+        console.log(multiplicand);
+        console.log(multiplier);
+        for(let i = 0; i < 10; i++){
+            let qq = document.createElement("p");            
+            qq.innerHTML = (i+1)+'. '+multiplicand[i]+' &times '+ multiplier[i]+' = <input type="text">';
+            qs.appendChild(qq);
+        }
+    }
+    function score(){
+        let ans = document.getElementsByTagName("input");
+        for(let i = 0; i < ans.length; i++){
+            if(ans[i].value != multiplicand[i] * multiplier[i]){
+                ans[i].style.backgroundColor = "pink";
+            }else{
+                ans[i].style.backgroundColor = "lightgreen";
+            }
+        }
+    }
+    
+</script> 
+</body>
+
+</html>
